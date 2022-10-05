@@ -1,5 +1,14 @@
+import Rout from "./routes"
+
+import GlobalStyle from "./styles/global"
+
 function App() {
-  return (<h2>Hi</h2>)
+  return (
+    <>
+      <Rout />
+      <GlobalStyle />
+    </>
+  )
 }
 
 export default App

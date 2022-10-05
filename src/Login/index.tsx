@@ -1,7 +1,15 @@
 import React from 'react';
 
+import {
+  Container
+} from './styles';
+
 const Login: React.FC = () => {
-  return (<h1>hi login</h1>);
+  return (
+    <Container>
+
+    </Container>
+  );
 }
 
 export default Login;
