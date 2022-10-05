@@ -1,14 +1,26 @@
 import React from 'react';
 
 import {
-  Container
+  Container,
+  Form,
+  Imgleft,
+  // ImgTopRight,
+  // ImgBottomRight,
+  // ContBackground
 } from './styles';
 
 const Login: React.FC = () => {
   return (
+    <>
     <Container>
+      <Form>
 
+      </Form>
+      <Imgleft/>
+      <ImgTopRight />
+      <ImgBottomRight />
     </Container>
+    </>
   );
 }
 
