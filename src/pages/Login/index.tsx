@@ -13,9 +13,11 @@ import { auth } from '../../services/firebase';
 import {
   Container,
   Form,
+  Input,
+  Title,
   Imgleft,
-  // ImgTopRight,
-  // ImgBottomRight,
+  ImgTopRight,
+  ImgBottomRight,
   // ContBackground
 } from './styles';
 
@@ -83,25 +85,35 @@ export function Login() {
     <>
       <Container>
         <Form>
+          <Title>Inscreva-se</Title>
+          <div>
+            <p>Email</p>
+            <Input
+              type="email"
+              placeholder='Digite seu Email'
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
+          <div>
+            <p>Senha</p>
+            <Input
+              type="password"
+              placeholder='Digite sua Senha'
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
+          
+          <button onClick={handleSignIn}>Login</button>
+
           <button onClick={handleGoogleSignIn}>Google</button>
           <button onClick={handleGithubSignIn}>Github</button>
-          <input 
-            type="email" 
-            placeholder='email' 
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <input 
-            type="password" 
-            placeholder='password' 
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <button onClick={handleSignIn}>Login</button>
         </Form>
-        {/* <ImgTopRight />
-        <ImgBottomRight /> */}
+
         <Imgleft />
+        <ImgTopRight />
+        <ImgBottomRight /> 
       </Container>
     </>
   );
