@@ -68,6 +68,7 @@ export function Login() {
     signInWithEmailAndPassword(auth, email, password)
     .then(res => {
       console.log(res)
+      setTimeout(() => window.location.href = '/main', 500)
       setEmail('');
       setPassword('');
     })
@@ -93,38 +94,42 @@ export function Login() {
       <Container>
         <Form>
           <Title>Inscreva-se</Title>
+
           <div>
             <p>Email</p>
+
             <Input
               type="email"
               placeholder='Digite seu Email'
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-            />
+              />
           </div>
+
           <div>
             <p>Senha</p>
+            
             <Input
               type="password"
               placeholder='Digite sua Senha'
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-            />
+              />
           </div>
-          
+
           <button 
-            onClick={handleSignIn} 
+            onClick={handleSignIn}
             style={{
               background: ishoverButton === 1 ? `var(--green1)` :
-                          ishoverButton === 2 ? 'var(--green2)' :
-                          ishoverButton === 3 ? 'var(--secondary)' : 'var(--green1)',
+              ishoverButton === 2 ? 'var(--green2)' :
+              ishoverButton === 3 ? 'var(--secondary)' : 'var(--green1)',
               marginBottom: "24px",
               border: "1px solid var(--grey1)"
             }}
             onMouseEnter={() => setIshoverButton(1)}
             onMouseLeave={() => setIshoverButton(2)}
             onMouseDown={() => setIshoverButton(3)}
-          >
+            >
             <p>Login</p>
           </button>
 

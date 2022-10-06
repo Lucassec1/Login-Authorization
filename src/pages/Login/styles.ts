@@ -58,7 +58,7 @@ export const Divider = styled.hr`
     border: 0;
 
     width: 320px;
-    
+
 	border-top: 1px solid var(--grey1);
 `;
 
