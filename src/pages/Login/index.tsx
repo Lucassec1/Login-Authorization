@@ -1,5 +1,23 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
+import illustrationLeft from '../../assets/illustration_left.svg';
+import illustrationBottomRight from '../../assets/illustration_bottom_right.svg';
+import illustrationTopRight from '../../assets/illustration_top_right.svg';
+import google from '../../assets/google_icon.svg';
+import github from '../../assets/github_icon.svg';
+
+import {
+  Container,
+  Form,
+  Input,
+  Title,
+  Divider,
+  Imgleft,
+  ImgTopRight,
+  ImgBottomRight,
+} from './styles';
+
+import { auth } from '../../services/firebase';
 import { 
   GoogleAuthProvider, 
   GithubAuthProvider,
@@ -8,18 +26,6 @@ import {
   signOut,
   User 
 } from 'firebase/auth';
-import { auth } from '../../services/firebase';
-
-import {
-  Container,
-  Form,
-  Input,
-  Title,
-  Imgleft,
-  ImgTopRight,
-  ImgBottomRight,
-  // ContBackground
-} from './styles';
 
 interface SignIn {
   email: string;
@@ -29,6 +35,7 @@ interface SignIn {
 export function Login() {
   const [userGoogle, setUserGoogle] = useState<User | null>({} as User)
   const [userGithub, setUserGithub] = useState<User>({} as User)
+  const [ishoverButton, setIshoverButton] = useState(1)
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -105,15 +112,50 @@ export function Login() {
             />
           </div>
           
-          <button onClick={handleSignIn}>Login</button>
+          <button 
+            onClick={handleSignIn} 
+            style={{
+              background: ishoverButton === 1 ? `var(--green1)` :
+                          ishoverButton === 2 ? 'var(--green2)' :
+                          ishoverButton === 3 ? 'var(--secondary)' : 'var(--green1)',
+              marginBottom: "24px",
+              border: "1px solid var(--grey1)"
+            }}
+            onMouseEnter={() => setIshoverButton(1)}
+            onMouseLeave={() => setIshoverButton(2)}
+            onMouseDown={() => setIshoverButton(3)}
+          >
+            <p>Login</p>
+          </button>
 
-          <button onClick={handleGoogleSignIn}>Google</button>
-          <button onClick={handleGithubSignIn}>Github</button>
+          <Divider />
+
+          <button 
+            onClick={handleGoogleSignIn} 
+            style={{
+              gap: "5px",
+              marginTop: "16px",
+            }}
+          >
+            <img src={google} alt="google-icon"/>
+            <p>Continuar com o Google</p>
+          </button>
+          
+          <button 
+            onClick={handleGithubSignIn}
+            style={{
+              gap: "5px",
+              marginTop: "16px",
+            }}
+          >
+            <img src={github} alt="github-icon"/>
+            <p>Continuar com o Github</p>
+          </button>
         </Form>
 
-        <Imgleft />
-        <ImgTopRight />
-        <ImgBottomRight /> 
+        <Imgleft src={illustrationLeft} />
+        <ImgTopRight src={illustrationTopRight} />
+        <ImgBottomRight src={illustrationBottomRight} /> 
       </Container>
     </>
   );
