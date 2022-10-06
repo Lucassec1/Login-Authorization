@@ -19,7 +19,7 @@ import {
 } from './styles';
 
 export function Login() {
-  const [userGoogle, setUserGoogle] = useState<User>({} as User)
+  const [userGoogle, setUserGoogle] = useState<User | null>({} as User)
   const [userGithub, setUserGithub] = useState<User>({} as User)
 
   function handleGoogleSignIn() {
@@ -38,21 +38,23 @@ export function Login() {
     const providerGithub = new GithubAuthProvider();
 
     signInWithPopup(auth, providerGithub)
-    .then((res) => {
-      setUserGithub(res.user);
-    })
-    .catch((err) => {
-      console.log(err);
-    })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
   }
 
   function Signout() {
     signOut(auth)
     .then((response) => {
-       console.log('Signout successful!')
+      console.log('Signout successful!')
+      setUserGoogle(null)
+      // setUserGithub(null)
     })
     .catch((error) => {
-       console.log('Signout failed')
+      console.log('Signout failed')
     });
  }
 
