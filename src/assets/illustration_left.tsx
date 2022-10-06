@@ -1,6 +1,6 @@
 import React from "react";
 
-export const illustrationLeft = () => {
+const illustrationLeft = () => {
     return (
         <svg width="326" height="914" viewBox="0 0 326 914" fill="none" xmlns="http://www.w3.org/2000/svg">
             <circle cx="-131" cy="457" r="457" fill="#00C48C"/>
@@ -8,3 +8,5 @@ export const illustrationLeft = () => {
         </svg>
     )    
 }
+
+export default illustrationLeft;
