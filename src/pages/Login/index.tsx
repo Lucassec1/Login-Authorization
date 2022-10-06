@@ -1,6 +1,12 @@
 import React, { useState } from 'react';
 
-import { GoogleAuthProvider, signInWithPopup, User } from 'firebase/auth';
+import { 
+  GoogleAuthProvider, 
+  GithubAuthProvider,
+  signInWithPopup, 
+  signOut,
+  User 
+} from 'firebase/auth';
 import { auth } from '../../services/firebase';
 
 import {
@@ -13,30 +19,54 @@ import {
 } from './styles';
 
 export function Login() {
-  const [user, setUser] = useState<User>({} as User)
+  const [userGoogle, setUserGoogle] = useState<User>({} as User)
+  const [userGithub, setUserGithub] = useState<User>({} as User)
 
   function handleGoogleSignIn() {
-    const provider = new GoogleAuthProvider();
+    const providerGoogle = new GoogleAuthProvider();
 
-    signInWithPopup(auth, provider)
+    signInWithPopup(auth, providerGoogle)
       .then((result) => {
-        setUser(result.user);
+        setUserGoogle(result.user);
       })
       .catch((error) => {
         console.log(error);
       })
   }
 
+  function handleGithubSignIn() {
+    const providerGithub = new GithubAuthProvider();
+
+    signInWithPopup(auth, providerGithub)
+    .then((res) => {
+      setUserGithub(res.user);
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+  }
+
+  function Signout() {
+    signOut(auth)
+    .then((response) => {
+       console.log('Signout successful!')
+    })
+    .catch((error) => {
+       console.log('Signout failed')
+    });
+ }
+
   return (
     <>
-    <Container>
-      <Form>
-        <button onClick={handleGoogleSignIn}>Google</button>
-      </Form>
-      {/* <ImgTopRight />
-      <ImgBottomRight /> */}
-      <Imgleft />
-    </Container>
+      <Container>
+        <Form>
+          <button onClick={handleGoogleSignIn}>Google</button>
+          <button onClick={handleGithubSignIn}>Github</button>
+        </Form>
+        {/* <ImgTopRight />
+        <ImgBottomRight /> */}
+        <Imgleft />
+      </Container>
     </>
   );
 }
