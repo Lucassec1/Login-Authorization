@@ -127,8 +127,8 @@ export function Login() {
             onClick={handleSignIn}
             style={{
               background: ishoverButton === 1 ? `var(--green1)` :
-              ishoverButton === 2 ? 'var(--green2)' :
-              ishoverButton === 3 ? 'var(--secondary)' : 'var(--green1)',
+                          ishoverButton === 2 ? 'var(--green2)' :
+                          ishoverButton === 3 ? 'var(--secondary)' : 'var(--green1)',
               marginBottom: "24px",
               border: "none",
             }}

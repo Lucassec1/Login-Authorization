@@ -14,8 +14,10 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.4.1",
+    "rewrite": "^0.0.1",
     "styled": "^1.0.0",
-    "styled-components": "^5.3.6"
+    "styled-components": "^5.3.6",
+    "to": "^0.2.9"
   },
   "devDependencies": {
     "@types/react": "^18.0.17",

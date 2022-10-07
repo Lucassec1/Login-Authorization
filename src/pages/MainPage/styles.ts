@@ -43,8 +43,12 @@ export const Card = styled.div`
     }
 `;
 
-export const CardImg = styled.div`
-    background-image: url(${props => props.photo});
+interface StyledDivProps {
+    photo: string | null;
+  }
+
+export const CardImg = styled.div<StyledDivProps>`
+    background: url(${props => props.photo});
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
