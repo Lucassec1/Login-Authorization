@@ -1,5 +1,7 @@
 import { useState } from 'react';
 
+import photo from '../../assets/profile_icon.svg';
+
 import illustrationLeft from '../../assets/illustration_left.svg';
 import illustrationBottomRight from '../../assets/illustration_bottom_right.svg';
 import illustrationTopRight from '../../assets/illustration_top_right.svg';
@@ -23,7 +25,6 @@ import {
   GithubAuthProvider,
   signInWithPopup, 
   signInWithEmailAndPassword,
-  signOut,
   User 
 } from 'firebase/auth';
 
@@ -34,7 +35,9 @@ interface SignIn {
 
 export function Login() {
   const [userGoogle, setUserGoogle] = useState<User | null>({} as User)
-  const [userGithub, setUserGithub] = useState<User>({} as User)
+  const [userGithub, setUserGithub] = useState<User | null>({} as User)
+ 
+
   const [ishoverButton, setIshoverButton] = useState(1)
 
   const [email, setEmail] = useState('')
@@ -46,6 +49,12 @@ export function Login() {
     signInWithPopup(auth, providerGoogle)
       .then(result => {
         setUserGoogle(result.user);
+
+        localStorage.setItem("userName", `${result.user.displayName}` )
+        localStorage.setItem("userEmail", `${result.user.email}` )
+        localStorage.setItem("userPhoto", `${result.user.photoURL}` )
+
+        setTimeout(() => window.location.href = '/main', 500)
       })
       .catch(error => {
         console.log(error);
@@ -58,6 +67,12 @@ export function Login() {
     signInWithPopup(auth, providerGithub)
       .then(res => {
         setUserGithub(res.user);
+
+        localStorage.setItem("userName", `${res.user.displayName}` )
+        localStorage.setItem("userEmail", `${res.user.email}` )
+        localStorage.setItem("userPhoto", `${res.user.photoURL}` )
+
+        setTimeout(() => window.location.href = '/main', 500)
       })
       .catch(err => {
         console.log(err);
@@ -69,6 +84,9 @@ export function Login() {
     .then(res => {
       console.log(res)
       setTimeout(() => window.location.href = '/main', 500)
+      localStorage.setItem("userName", 'Thiago Elias Lima Campos' )
+      localStorage.setItem("userEmail", 'thiagolimacampos@gmail.com' )
+      localStorage.setItem("userPhoto", `${photo}` )
       setEmail('');
       setPassword('');
     })
@@ -77,23 +95,11 @@ export function Login() {
     })
   }
 
-  function Signout() {
-    signOut(auth)
-    .then(response => {
-      console.log('Signout successful!')
-      setUserGoogle(null)
-      // setUserGithub(null)
-    })
-    .catch(error => {
-      console.log('Signout failed')
-    });
-  }
-
   return (
     <>
       <Container>
         <Form>
-          <Title>Inscreva-se</Title>
+          <Title>Login</Title>
 
           <div>
             <p>Email</p>
@@ -103,7 +109,7 @@ export function Login() {
               placeholder='Digite seu Email'
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              />
+            />
           </div>
 
           <div>
@@ -114,7 +120,7 @@ export function Login() {
               placeholder='Digite sua Senha'
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              />
+            />
           </div>
 
           <button 
@@ -124,13 +130,13 @@ export function Login() {
               ishoverButton === 2 ? 'var(--green2)' :
               ishoverButton === 3 ? 'var(--secondary)' : 'var(--green1)',
               marginBottom: "24px",
-              border: "1px solid var(--grey1)"
+              border: "none",
             }}
             onMouseEnter={() => setIshoverButton(1)}
             onMouseLeave={() => setIshoverButton(2)}
             onMouseDown={() => setIshoverButton(3)}
-            >
-            <p>Login</p>
+          >
+            <p>Entrar</p>
           </button>
 
           <Divider />
