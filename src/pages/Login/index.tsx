@@ -25,7 +25,7 @@ import {
   GithubAuthProvider,
   signInWithPopup, 
   signInWithEmailAndPassword,
-  User 
+  User
 } from 'firebase/auth';
 
 interface SignIn {
@@ -37,7 +37,6 @@ export function Login() {
   const [userGoogle, setUserGoogle] = useState<User | null>({} as User)
   const [userGithub, setUserGithub] = useState<User | null>({} as User)
  
-
   const [ishoverButton, setIshoverButton] = useState(1)
 
   const [email, setEmail] = useState('')
